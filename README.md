@@ -109,6 +109,13 @@ src
 1. Visit the login page and enter your credentials.
 2. Upon successful login, a token is stored in local storage and the user is redirected to the dashboard.
 3. The app uses an Auth Guard to ensure only logged-in users can access certain routes.
+ or 
+
+For the FakeStore API, the default credentials are:
+
+Username: mor_2314
+
+Password: 83r5^_
 
 ### Product Management
 - Navigate to the **Products** section to view all available products.

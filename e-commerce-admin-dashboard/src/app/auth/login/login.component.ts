@@ -14,15 +14,21 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
-  login() {
-    this.apiService.login(this.username, this.password).subscribe((response: any) => {
-      localStorage.setItem('token', response.token);
-      this.router.navigate(['/dashboard']);
-    }, error => {
-      console.error('Login failed', error);
-    });
-  }
-}
+  login() { if (this.username && this.password) { 
+    console.log('Attempting login with:', this.username, this.password);
+     this.apiService.login(this.username, this.password).subscribe( 
+      (response: any) => { 
+      console.log('Login successful:', response); 
+      localStorage.setItem('token', response.token); 
+      this.router.navigate(['/home']); }, 
+      error => { this.errorMessage = 'Login failed. Please check your credentials and try again.'; 
+    console.error('Login failed', error);
+   } ); 
+  } else { this.errorMessage = 'Please enter both username and password.';
+    
+   }
+   }}

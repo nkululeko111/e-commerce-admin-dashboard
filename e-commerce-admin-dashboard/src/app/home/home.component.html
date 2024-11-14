@@ -1,8 +1,9 @@
 <div class="home">
     <h1>Welcome to the eCommerce Dashboard</h1>
     <div class="options">
-      <button routerLink="/dashboard">Go to Dashboard</button>
-      <button routerLink="/users">Manage Users</button>
+      <button (click)="navigateTo('/dashboard')">Go to Dashboard</button>
+      <button (click)="navigateTo('/users')">Manage Users</button>
+      <button (click)="logout()">Logout</button>
     </div>
   </div>
   

@@ -13,53 +13,54 @@ export class ApiService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);
   }
 
-  login(username: string, password: string) {
-    return this.http.post('https://fakestoreapi.com/auth/login', { username, password }).pipe(
+  getProducts(): Observable<any[]> {
+    return this.http.get<any[]>('https://fakestoreapi.com/products').pipe(
       catchError(this.handleError)
     );
   }
 
-  getProducts() {
-    return this.http.get('https://fakestoreapi.com/products').pipe(
+  getProductById(id: number): Observable<any> {
+    return this.http.get<any>(`https://fakestoreapi.com/products/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  getProductById(id: number) {
-    return this.http.get(`https://fakestoreapi.com/products/${id}`).pipe(
+  addProduct(product: any): Observable<any> {
+    return this.http.post<any>('https://fakestoreapi.com/products', product).pipe(
       catchError(this.handleError)
     );
   }
 
-  addProduct(product: any) {
-    return this.http.post('https://fakestoreapi.com/products', product).pipe(
+  updateProduct(id: number, product: any): Observable<any> {
+    return this.http.put<any>(`https://fakestoreapi.com/products/${id}`, product).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateProduct(id: number, product: any) {
-    return this.http.put(`https://fakestoreapi.com/products/${id}`, product).pipe(
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete<any>(`https://fakestoreapi.com/products/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteProduct(id: number) {
-    return this.http.delete(`https://fakestoreapi.com/products/${id}`).pipe(
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>('https://fakestoreapi.com/auth/login', { username, password }).pipe(
       catchError(this.handleError)
     );
   }
+  register(username: string, password: string, email: string): Observable<any> { 
+    return this.http.post<any>('https://fakestoreapi.com/users', { username, password, email }).pipe( 
+      catchError(this.handleError) ); }
 
-  getUsers() {
-    return this.http.get('https://fakestoreapi.com/users').pipe(
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>('https://fakestoreapi.com/users').pipe(
       catchError(this.handleError)
     );
   }

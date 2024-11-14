@@ -15,7 +15,7 @@
   }
   
   .options {
-    display: flex;
+    display: flex; 
     gap: 20px;
     margin-top: 20px;
   }
@@ -23,7 +23,7 @@
   .options button {
     padding: 10px 20px;
     font-size: 1.2em;
-    background-color: #007bff;
+    background-color: #119927;
     color: white;
     border: none;
     border-radius: 5px;
@@ -31,6 +31,6 @@
   }
   
   .options button:hover {
-    background-color: #0056b3;
+    background-color: #044b24;
   }
   

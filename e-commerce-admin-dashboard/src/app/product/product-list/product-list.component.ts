@@ -23,8 +23,8 @@ export class ProductListComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
-    this.apiService.getProducts().subscribe(data => {
-      this.products = data as any[];
+    this.apiService.getProducts().subscribe((data: any[]) => {
+      this.products = data;
       this.filteredProducts = this.products;
       this.totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
       this.updatePaginatedProducts();
