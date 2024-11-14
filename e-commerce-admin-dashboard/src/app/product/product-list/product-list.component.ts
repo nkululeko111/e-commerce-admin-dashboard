@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-product-list',
-  standalone: true,
-  imports: [],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+  products: any[] = [];
 
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit(): void {
+    this.apiService.getProducts().subscribe(data => {
+      this.products = data as any[];
+    });
+  }
 }

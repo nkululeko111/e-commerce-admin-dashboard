@@ -18,4 +18,8 @@ export class ApiService {
       })
     );
   }
+  getProducts() { return this.http.get('https://fakestoreapi.com/products').pipe( catchError(error => { 
+    console.error('Error fetching products:', error); return throwError(error); }) ); 
+  } 
 }
+

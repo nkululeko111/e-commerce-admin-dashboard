@@ -59,7 +59,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [Angular CLI](https://angu
 1. Clone the repository:
     ```bash
     git clone https://github.com/nkululeko111/e-commerce-admin-dashboard.git
-    cd e-commerce-admin-dashboard
+    cd e-commerce-admin-dashboard/e-commerce-admin-dashboard
     ```
 
 2. Install dependencies:
