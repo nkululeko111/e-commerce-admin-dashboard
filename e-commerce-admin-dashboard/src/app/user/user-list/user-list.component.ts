@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,50 +13,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserListComponent implements OnInit {
   users: any[] = [];
-  filteredUsers: any[] = [];
-  paginatedUsers: any[] = [];
-  searchTerm: string = '';
-  currentPage: number = 1;
-  itemsPerPage: number = 5;
-  totalPages: number = 1;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
-    this.apiService.getUsers().subscribe(data => {
-      this.users = data as any[];
-      this.filteredUsers = this.users;
-      this.totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
-      this.updatePaginatedUsers();
+    this.apiService.getUsers().subscribe((data: any[]) => {
+      this.users = data;
     });
   }
 
-  filterUsers() {
-    this.filteredUsers = this.users.filter(user => 
-      user.username.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-    this.totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
-    this.currentPage = 1;
-    this.updatePaginatedUsers();
+  editUser(id: number) {
+    this.router.navigate([`/edit-user/${id}`]);
   }
 
-  updatePaginatedUsers() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
-  }
-
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePaginatedUsers();
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePaginatedUsers();
-    }
+  deleteUser(id: number) {
+    this.apiService.deleteUser(id).subscribe(() => {
+      this.users = this.users.filter(user => user.id !== id);
+    });
   }
 }

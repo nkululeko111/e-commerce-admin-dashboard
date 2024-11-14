@@ -71,4 +71,8 @@ export class ProductListComponent implements OnInit {
   editProduct(id: number) {
     this.router.navigate([`/edit-product/${id}`]);
   }
+  deleteProduct(id: number) { 
+    this.apiService.deleteProduct(id).subscribe(() => { 
+      this.products = this.products.filter(product => product.id !== id);
+       this.filterProducts(); }); }
 }

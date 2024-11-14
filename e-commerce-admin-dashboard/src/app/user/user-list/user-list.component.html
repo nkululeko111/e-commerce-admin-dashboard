@@ -1,16 +1,27 @@
 <div class="user-list">
-  <h2>Users</h2>
-  <input type="text" placeholder="Search users" [(ngModel)]="searchTerm" (input)="filterUsers()">
-  <ul>
-    <li *ngFor="let user of paginatedUsers">
-      {{ user.username }} - {{ user.email }}
-    </li>
-  </ul>
-  <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  <h2>Manage Users</h2>
+  <div class="user-table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button (click)="editUser(user.id)">Edit</button>
+            <button (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-  

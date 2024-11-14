@@ -1,14 +1,15 @@
-<div class="product-list">
+<div class="dashboard">
   <h2>Products</h2>
-  <input type="text" placeholder="Search products" [(ngModel)]="searchTerm" (input)="filterProducts()">
-  <button (click)="addProduct()">Add Product</button>
-  <ul>
-    <li *ngFor="let product of paginatedProducts">
-      {{ product.title }} - ${{ product.price }}
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of paginatedProducts">
+      <img [src]="product.image" alt="{{ product.title }}" class="product-image">
+      <h3>{{ product.title }}</h3>
+      <p>${{ product.price }}</p>
       <button (click)="viewDetails(product.id)">View Details</button>
       <button (click)="editProduct(product.id)">Edit</button>
-    </li>
-  </ul>
+      <button (click)="deleteProduct(product.id)">Delete</button>
+    </div>
+  </div>
   <div class="pagination">
     <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>

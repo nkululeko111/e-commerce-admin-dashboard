@@ -44,11 +44,9 @@ export class ApiService {
     );
   }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete<any>(`https://fakestoreapi.com/products/${id}`).pipe(
-      catchError(this.handleError)
-    );
-  }
+  deleteProduct(id: number): Observable<any> { 
+    return this.http.delete<any>(`https://fakestoreapi.com/products/${id}`).pipe( 
+      catchError(this.handleError) ); } 
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>('https://fakestoreapi.com/auth/login', { username, password }).pipe(
@@ -64,4 +62,7 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  deleteUser(id: number): Observable<any> { 
+    return this.http.delete<any>(`https://fakestoreapi.com/users/${id}`).pipe( 
+      catchError(this.handleError) ); }
 }
