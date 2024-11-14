@@ -1,1 +1,19 @@
-<p>product-form works!</p>
+<div class="product-form">
+    <h2>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="title">Title:</label>
+        <input id="title" formControlName="title" type="text" required>
+      </div>
+      <div>
+        <label for="price">Price:</label>
+        <input id="price" formControlName="price" type="number" required>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description" required></textarea>
+      </div>
+      <button type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+    </form>
+  </div>
+  

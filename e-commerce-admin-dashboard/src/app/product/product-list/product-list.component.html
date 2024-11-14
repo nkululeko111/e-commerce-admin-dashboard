@@ -1,9 +1,17 @@
 <div class="product-list">
-    <h2>Products</h2>
-    <ul>
-      <li *ngFor="let product of products">
-        {{ product.title }} - ${{ product.price }}
-      </li>
-    </ul>
+  <h2>Products</h2>
+  <input type="text" placeholder="Search products" [(ngModel)]="searchTerm" (input)="filterProducts()">
+  <button (click)="addProduct()">Add Product</button>
+  <ul>
+    <li *ngFor="let product of paginatedProducts">
+      {{ product.title }} - ${{ product.price }}
+      <button (click)="viewDetails(product.id)">View Details</button>
+      <button (click)="editProduct(product.id)">Edit</button>
+    </li>
+  </ul>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
   </div>
-  
+</div>
